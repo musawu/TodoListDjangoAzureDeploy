@@ -7,10 +7,13 @@ For more information on this file, see
 https://docs.djangoproject.com/en/3.0/howto/deployment/wsgi/
 """
 
-import os
 
+
+import os
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'todo_list.settings')
+settings_module = 'todo_list.deployment' if 'WEBSITE_HOSTNAME' in os.environ else 'todo_list.settings'
+
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', settings_module)
 
 application = get_wsgi_application()
